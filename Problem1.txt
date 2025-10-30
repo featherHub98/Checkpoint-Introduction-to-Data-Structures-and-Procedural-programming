@@ -1,0 +1,53 @@
+ALGORITHM ArraySumExclusive
+VAR
+    arr1, arr2 : ARRAY OF INTEGER;
+    sum : INTEGER := 0;
+    i, j : INTEGER;
+    exist : BOOLEAN;
+    
+BEGIN
+    arr1 := [3, 1, 7, 9];
+    arr2 := [2, 4, 1, 9, 3];
+    
+    // Process elements in arr1 that don't exist in arr2
+    FOR i FROM 0 TO LENGTH(arr1) - 1 DO
+        exist := FALSE;
+        
+        // Check if current element exists in arr2
+        FOR j FROM 0 TO LENGTH(arr2) - 1 DO
+            IF arr1[i] == arr2[j] THEN
+                exist := TRUE;
+            END IF;
+        END FOR;
+        
+        // Add to sum if element doesn't exist in arr2
+        IF exist == FALSE THEN
+            sum := sum + arr1[i];
+        END IF;
+        
+        Write("Current sum: " + sum);
+    END FOR;
+    
+    // Process elements in arr2 that don't exist in arr1
+    FOR i FROM 0 TO LENGTH(arr2) - 1 DO
+        exist := FALSE;
+        
+        // Check if current element exists in arr1
+        FOR j FROM 0 TO LENGTH(arr1) - 1 DO
+            IF arr2[i] == arr1[j] THEN
+                exist := TRUE;
+            END IF;
+        END FOR;
+        
+        // Add to sum if element doesn't exist in arr1
+        IF exist == FALSE THEN
+            sum := sum + arr2[i];
+        END IF;
+        
+        Write("Current sum: " + sum);
+    END FOR;
+    
+    // Return final result
+    Write("Final sum: " + sum);
+    RETURN sum;
+END
