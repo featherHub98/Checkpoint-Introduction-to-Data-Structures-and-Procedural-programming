@@ -1,0 +1,61 @@
+ALGORITHM OrthogonalVectors
+VAR
+    n : INTEGER;  // Number of vector pairs
+    i, j : INTEGER;
+    v1, v2 : ARRAY OF REAL;  // Vectors
+    ps : REAL;    // Dot product result
+    vector_size : INTEGER;
+
+// Procedure to calculate dot product
+PROCEDURE dot_product(v1, v2 : ARRAY OF REAL; VAR ps : REAL)
+VAR
+    k : INTEGER;
+BEGIN
+    ps := 0;
+    FOR k FROM 0 TO LENGTH(v1) - 1 DO
+        ps := ps + (v1[k] * v2[k]);
+    END FOR;
+END PROCEDURE
+
+BEGIN
+    // Read number of vector pairs
+    Write("Enter number of vector pairs: ");
+    READ(n);
+    
+    // Read vector size
+    Write("Enter vector size: ");
+    READ(vector_size);
+    
+    // Initialize vectors
+    v1 := ARRAY[vector_size] OF REAL;
+    v2 := ARRAY[vector_size] OF REAL;
+    
+    // Process n pairs of vectors
+    FOR i FROM 1 TO n DO
+        Write("Processing vector pair " + i);
+        
+        // Read first vector
+        Write("Enter elements for vector v1:");
+        FOR j FROM 0 TO vector_size - 1 DO
+            READ(v1[j]);
+        END FOR;
+        
+        // Read second vector
+        Write("Enter elements for vector v2:");
+        FOR j FROM 0 TO vector_size - 1 DO
+            READ(v2[j]);
+        END FOR;
+        
+        // Calculate dot product using procedure
+        dot_product(v1, v2, ps);
+        
+        // Check if vectors are orthogonal
+        Write("Dot product: " + ps);
+        IF ps == 0 THEN
+            Write("Vectors are ORTHOGONAL");
+        ELSE
+            Write("Vectors are NOT orthogonal");
+        END IF;
+        Write("");  // Empty line for separation
+    END FOR;
+END
